@@ -174,14 +174,12 @@ void simulate(int totalYears, int quaestors, int aediles, int praetors, int cons
     vector<int> consulAges;
 
     int psi = startingPSI;
-    double totalQuaestorsFilled = 20;
-    double totalAedilesFilled = 10;
-    double totalPraetorsFilled = 8;
-    double totalConsulsFilled = 2;
+    double QuaestorsFillRates = 1;
+    double AedilesFillRates = 1;
+    double PraetorsFillRates = 1;
+    double ConsulsFillRates = 1;
 
     for (int year = 2; year <= totalYears; ++year) {
-
-        int consulPenalty = 0; //To calculate the re-electing of a consul's penalty
 
         int availableQuaestors = quaestors;
         int availableAediles = aediles;
@@ -345,24 +343,24 @@ void simulate(int totalYears, int quaestors, int aediles, int praetors, int cons
         psi -= (unfilledPositionPenalty * unfilledPositions);
     
         //Calculate annual fill rates
-        totalQuaestorsFilled += (quaestors-availableQuaestors);
-        totalAedilesFilled += (aediles-availableAediles);
-        totalPraetorsFilled += (praetors-availablePraetors);
-        totalConsulsFilled += (consuls-availableConsuls);
+        QuaestorsFillRates += (quaestors-availableQuaestors)/quaestors;
+        AedilesFillRates += (aediles-availableAediles)/aediles;
+        PraetorsFillRates += (praetors-availablePraetors)/praetors;
+        ConsulsFillRates += (consuls-availableConsuls)/consuls;
     }
 
-    double annualFillRateQuaestor = totalQuaestorsFilled / (totalYears);
-    double annualFillRateAedile = totalAedilesFilled / (totalYears);
-    double annualFillRatePraetor = totalPraetorsFilled / (totalYears);
-    double annualFillRateConsul = totalConsulsFilled / (totalYears);
+    double annualFillRateQuaestor = QuaestorsFillRates / totalYears;
+    double annualFillRateAedile = AedilesFillRates / totalYears;
+    double annualFillRatePraetor = PraetorsFillRates / totalYears;
+    double annualFillRateConsul = ConsulsFillRates / totalYears;
 
 
     cout << "End-of-Simulation PSI: " << psi << endl;
     cout << "Overall Annual Fill Rate:" << endl;
-    cout << "Quaestor: " << annualFillRateQuaestor << "%" << endl;
-    cout << "Aedile: " << annualFillRateAedile<< "%" << endl;
-    cout << "Praetor: " << annualFillRatePraetor << "%" << endl;
-    cout << "Consul: " << annualFillRateConsul << "%" << endl;
+    cout << "Quaestor: " << annualFillRateQuaestor*100 << "%" << endl;
+    cout << "Aedile: " << annualFillRateAedile * 100<< "%" << endl;
+    cout << "Praetor: " << annualFillRatePraetor *100<< "%" << endl;
+    cout << "Consul: " << annualFillRateConsul*100 << "%" << endl;
 
     calculateAgeDistribution("Quaestors",quaestorAges);
     calculateAgeDistribution("Aediles",aedileAges);
