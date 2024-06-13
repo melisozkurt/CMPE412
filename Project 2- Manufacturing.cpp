@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <array>
 
-enum EventType { ARRIVAL, DEPARTURE, BREAKDOWN,REPAIR, MAINTENANCE, SHIFT_CHANGE, RM_SUPPLY};
+enum EventType { ARRIVAL, DEPARTURE, BREAKDOWN, REPAIR, MAINTENANCE, SHIFT_CHANGE, RM_SUPPLY};
 
 class Event {
 public:
